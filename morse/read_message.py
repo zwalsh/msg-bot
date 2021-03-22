@@ -68,7 +68,7 @@ def _read_word(word, lights):
     for i, letter in enumerate(letters):
         _read_letter(letter, lights)
         if i != len(letters) - 1:
-            time.sleep(LETTER_PAUSE)
+            lights.new_letter()
 
 
 def _read_letter(letter, lights):
@@ -81,4 +81,4 @@ def _read_letter(letter, lights):
             lights.dash()
         # pause between each symbol, but not after the last one
         if i != len(pattern) - 1:
-            time.sleep(SYMBOL_PAUSE)
+            lights.new_word()
