@@ -1,4 +1,6 @@
 import logging
+import time
+
 from gpiozero import LED
 
 logger = logging.getLogger()
@@ -18,3 +20,9 @@ class Light:
     def turn_off(self):
         self.led.off()
         logger.info("Off!")
+
+    def blink(self, times=5):
+        for i in range(0, times):
+            self.turn_on()
+            time.sleep(0.1)
+            self.turn_off()
