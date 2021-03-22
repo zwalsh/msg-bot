@@ -7,5 +7,7 @@ def run_loop(button, light, message):
     while True:
         if message.is_unread():
             light.turn_on()
+        if button.pressed():
+            light.turn_off()
             time.sleep(5)
             read_message(message.get_message(), light)
