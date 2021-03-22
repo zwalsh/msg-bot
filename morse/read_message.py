@@ -59,7 +59,7 @@ def read_message(msg, lights: MorseLights):
     words = msg.upper().split()
     for word in words:
         _read_word(word, lights)
-        time.sleep(WORD_PAUSE)
+        lights.new_word()
 
 
 def _read_word(word, lights):
@@ -81,4 +81,4 @@ def _read_letter(letter, lights):
             lights.dash()
         # pause between each symbol, but not after the last one
         if i != len(pattern) - 1:
-            lights.new_word()
+            time.sleep(SYMBOL_PAUSE)
