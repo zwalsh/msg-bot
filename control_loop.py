@@ -1,13 +1,14 @@
 import time
 
-from read_message import read_message
+from morse.MorseLights import MorseLights
+from morse.read_message import read_message
 
 
-def run_loop(button, light, message):
+def run_loop(button, lights: MorseLights, message):
     while True:
         if message.is_unread():
-            light.turn_on()
+            lights.turn_on()
         if button.pressed():
-            light.blink()
+            lights.blink()
             time.sleep(5)
-            read_message(message.get_message(), light)
+            read_message(message.get_message(), lights)

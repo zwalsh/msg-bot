@@ -1,20 +1,10 @@
 import logging
 import time
 
-logger = logging.getLogger()
+from morse.MORSE_CONSTANTS import SYMBOL_PAUSE, LETTER_PAUSE, WORD_PAUSE
+from morse.MorseLights import MorseLights
 
-# length of time in seconds for a morse Dot
-# Standard is:
-# dot = 1 unit
-# dash = 3 units
-# between letters = 3 units
-# between words = 7 units
-MORSE_TIME_UNIT_S = 2.0 / 3.0
-DOT = MORSE_TIME_UNIT_S
-DASH = MORSE_TIME_UNIT_S * 3
-SYMBOL_PAUSE = MORSE_TIME_UNIT_S * 1.5
-LETTER_PAUSE = MORSE_TIME_UNIT_S * 6
-WORD_PAUSE = MORSE_TIME_UNIT_S * 10
+logger = logging.getLogger()
 
 MORSE_CODE_DICT = {
     'A': '.-',
@@ -64,31 +54,31 @@ MORSE_CODE_DICT = {
 }
 
 
-def read_message(msg, light):
+def read_message(msg, lights: MorseLights):
     logger.info(f"Reading {msg} out on light")
     words = msg.upper().split()
     for word in words:
-        _read_word(word, light)
+        _read_word(word, lights)
         time.sleep(WORD_PAUSE)
 
 
-def _read_word(word, light):
+def _read_word(word, lights):
     logger.info(f"Reading {word} out on light")
     letters = [letter for letter in word if letter in MORSE_CODE_DICT.keys()]
     for i, letter in enumerate(letters):
-        _read_letter(letter, light)
+        _read_letter(letter, lights)
         if i != len(letters) - 1:
             time.sleep(LETTER_PAUSE)
 
 
-def _read_letter(letter, light):
+def _read_letter(letter, lights):
     pattern = MORSE_CODE_DICT[letter]
     logger.info(f"Reading {letter} out as {pattern}")
     for i, symbol in enumerate(pattern):
-        pause = DOT if symbol == '.' else DASH
-        light.turn_on()
-        time.sleep(pause)
-        light.turn_off()
+        if symbol == '.':
+            lights.dot()
+        if symbol == '-':
+            lights.dash()
         # pause between each symbol, but not after the last one
         if i != len(pattern) - 1:
             time.sleep(SYMBOL_PAUSE)
