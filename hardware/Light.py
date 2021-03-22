@@ -26,3 +26,4 @@ class Light:
             self.turn_on()
             time.sleep(0.1)
             self.turn_off()
+            time.sleep(0.1)
