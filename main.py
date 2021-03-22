@@ -17,7 +17,4 @@ if __name__ == '__main__':
     data_path = os.getenv("MSG_BOT_DATA_PATH")
     logger.info(f"Starting up with data path {data_path}")
     message = Message(Path(data_path or "data"))
-    logging.getLogger().info(f"Is message unread? {message.is_unread()}")
-    read_message(message.get_message(), Light())
-    logging.getLogger().info(f"Is message unread now? {message.is_unread()}")
-    # run_loop(Button(), Light(), Message())
+    run_loop(Button(), Light(), message)

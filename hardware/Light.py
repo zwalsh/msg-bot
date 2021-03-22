@@ -1,17 +1,20 @@
 import logging
+from gpiozero import LED
 
 logger = logging.getLogger()
+
+_GPIO_PIN = 6
 
 
 class Light:
 
-    def __init__(self):
-        self._on = False
+    def __init__(self, pin=_GPIO_PIN):
+        self.led = LED(pin)
 
     def turn_on(self):
-        self._on = True
+        self.led.on()
         logger.info("On!")
 
     def turn_off(self):
-        self._on = False
+        self.led.off()
         logger.info("Off!")
