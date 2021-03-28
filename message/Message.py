@@ -30,7 +30,7 @@ class Message:
 
     def _set_unread(self, unread):
         self._last_unread = unread
-        self._unread_file.write_text(unread)
+        self._unread_file.write_text(str(unread))
 
     def get_message(self):
         self._set_unread(False)
