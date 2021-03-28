@@ -1,7 +1,7 @@
 import logging
 import time
 
-from morse.MORSE_CONSTANTS import SYMBOL_PAUSE, LETTER_PAUSE, WORD_PAUSE
+from morse.MORSE_CONSTANTS import SYMBOL_PAUSE
 from morse.MorseLights import MorseLights
 
 logger = logging.getLogger()
@@ -60,6 +60,7 @@ def read_message(msg, lights: MorseLights):
     for word in words:
         _read_word(word, lights)
         lights.new_word()
+        time.sleep(SYMBOL_PAUSE)
 
 
 def _read_word(word, lights):
@@ -69,6 +70,7 @@ def _read_word(word, lights):
         _read_letter(letter, lights)
         if i != len(letters) - 1:
             lights.new_letter()
+            time.sleep(SYMBOL_PAUSE)
 
 
 def _read_letter(letter, lights):
@@ -79,6 +81,4 @@ def _read_letter(letter, lights):
             lights.dot()
         if symbol == '-':
             lights.dash()
-        # pause between each symbol, but not after the last one
-        if i != len(pattern) - 1:
-            time.sleep(SYMBOL_PAUSE)
+        time.sleep(SYMBOL_PAUSE)
