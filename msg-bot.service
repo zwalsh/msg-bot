@@ -1,14 +1,12 @@
 [Unit]
 Description=Message Bot Service
 After=network.target
-StartLimitAction=reboot
 StartLimitIntervalSec=60
 StartLimitBurst=5
 
 [Service]
 Type=simple
-User=zach
-WorkingDirectory=/home/zach
+WorkingDirectory=/home/zach/msg-bot
 ExecStart=/home/zach/msg-bot/start.sh
 Restart=always
 RestartSec=1
