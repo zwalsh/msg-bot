@@ -1,10 +1,9 @@
-import logging
 from pathlib import Path
+
+from message import logger
 
 _MSG_FILE_NAME = 'message.txt'
 _UNREAD_FILE_NAME = 'unread.txt'
-
-logger = logging.getLogger()
 
 
 class Message:
@@ -37,6 +36,10 @@ class Message:
         return self._msg_file.read_text()
 
     def set_message(self, msg):
-        logger.info(f'Setting new message: {msg}')
-        self._msg_file.write_text(msg)
-        self._set_unread(True)
+        cur_text = self._msg_file.read_text()
+        if cur_text.strip() != msg.strip():
+            logger.info(f'Setting new message: {msg.strip()}')
+            self._msg_file.write_text(msg.strip())
+            self._set_unread(True)
+        else:
+            logger.info("Message is not new")
