@@ -10,5 +10,5 @@ def run_loop(button, lights: MorseLights, message):
             lights.turn_on()
         if button.pressed():
             lights.blink()
-            time.sleep(5)
+            time.sleep(3)
             read_message(message.get_message(), lights)

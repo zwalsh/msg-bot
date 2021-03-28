@@ -33,9 +33,17 @@ class MorseLights:
         self._new_word.turn_off()
 
     def turn_on(self):
-        self._dot_light.turn_on()
-        self._dash_light.turn_on()
+        for light in self.all_lights():
+            light.turn_on()
 
-    def blink(self):
-        self._dot_light.blink()
-        self._dash_light.blink()
+    def blink(self, times=5):
+        for i in range(0, times):
+            for light in self.all_lights():
+                light.turn_on()
+            time.sleep(0.1)
+            for light in self.all_lights():
+                light.turn_off()
+            time.sleep(0.1)
+
+    def all_lights(self):
+        return [self._dot_light, self._dash_light, self._new_letter, self._new_word]
