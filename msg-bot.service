@@ -1,6 +1,11 @@
+# To use this file: symlink into /etc/systemd/system
+# Then enable with:
+# > systemctl enable msg-bot.service
+# > systemctl start msg-bot.service
+
 [Unit]
 Description=Message Bot Service
-After=network.target
+After=network.target 
 StartLimitIntervalSec=60
 StartLimitBurst=5
 
